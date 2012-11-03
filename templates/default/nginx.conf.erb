@@ -32,6 +32,13 @@ http {
   access_log	<%= node['nginx']['log_dir'] %>/access.log;
   <% end %>
 
+  <% if node['nginx']['log_format']
+        node['nginx']['log_format'].each do |log_format| -%>
+  log_format <%= log_format['name'] %> <%= log_format['format'] %>;   
+  <%    end
+     end 
+  -%>
+
   sendfile on;
   tcp_nopush on;
   tcp_nodelay on;
